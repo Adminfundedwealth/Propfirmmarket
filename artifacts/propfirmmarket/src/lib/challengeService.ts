@@ -1,5 +1,5 @@
-import { firms, type Firm } from '@/data/firms';
-import { getFirmPath, normalizeFirmSlug } from '@/lib/firmService';
+import { firms, type Firm } from '../data/firms';
+import { getFirmPath, normalizeFirmSlug } from './firmService';
 
 interface ChallengeRuleProfileSource {
   firmId: number;

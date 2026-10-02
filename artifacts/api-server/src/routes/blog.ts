@@ -56,13 +56,14 @@ router.post("/blog/generate", adminAuth, generateLimiter, async (req, res) => {
     if (!hasDatabase()) {
       const fallback = createGeneratedFallbackBlog(keyword);
       // Preserve the shape expected by the frontend and local CMS workflows.
-      return res.json({
+      res.json({
         success: true,
         blog: fallback,
         url: `/blog/${fallback.slug}`,
         socialContent: JSON.parse(fallback.socialContent),
         socialMessage: JSON.parse(fallback.socialContent).twitter,
       });
+      return;
     }
 
     const generated = await generateBlogPost(keyword);
@@ -131,7 +132,8 @@ router.post("/blog/generate", adminAuth, generateLimiter, async (req, res) => {
 router.get("/blogs", async (_req, res) => {
   try {
     if (!hasDatabase()) {
-      return res.json({ success: true, blogs: getFallbackBlogSummaries() });
+      res.json({ success: true, blogs: getFallbackBlogSummaries() });
+      return;
     }
 
     const blogs = await db
@@ -153,7 +155,7 @@ router.get("/blogs", async (_req, res) => {
       .orderBy(desc(blogsTable.publishedAt))
       .limit(50);
 
-    return res.json({ success: true, blogs });
+    res.json({ success: true, blogs });
   } catch (err) {
     logger.error({ err }, "Failed to fetch blogs");
     res.status(500).json({ error: "Failed to fetch blogs" });
@@ -219,7 +221,7 @@ router.get("/blog-stats", async (_req, res) => {
     if (!hasDatabase()) {
       const fallbackBlogs = getFallbackBlogSummaries();
       const totalViews = fallbackBlogs.reduce((sum, blog) => sum + Number(blog.views || 0), 0);
-      return res.json({
+      res.json({
         success: true,
         stats: {
           totalPosts: fallbackBlogs.length,
@@ -228,6 +230,7 @@ router.get("/blog-stats", async (_req, res) => {
           avgViewsPerPost: fallbackBlogs.length ? Math.round(totalViews / fallbackBlogs.length) : 0,
         },
       });
+      return;
     }
 
     const blogs = await db
@@ -238,9 +241,10 @@ router.get("/blog-stats", async (_req, res) => {
       })
       .from(blogsTable);
 
-    const totalViews = blogs.reduce((s, b) => s + b.views, 0);
-    const totalLinks = blogs.reduce((s, b) => {
-      try { return s + (JSON.parse(b.internalLinks) as string[]).length; } catch { return s; }
+    const blogRows = blogs as Array<{ views: number; internalLinks: string }>;
+    const totalViews = blogRows.reduce((sum, blog) => sum + blog.views, 0);
+    const totalLinks = blogRows.reduce((sum, blog) => {
+      try { return sum + (JSON.parse(blog.internalLinks) as string[]).length; } catch { return sum; }
     }, 0);
 
     res.json({

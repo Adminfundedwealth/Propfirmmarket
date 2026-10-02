@@ -33,13 +33,17 @@ function toW3CDate(date: Date | string | null): string {
 
 router.get("/sitemap.xml", async (_req, res) => {
   try {
-    const blogs = await db
+    const blogs = (await db
       .select({
         slug: blogsTable.slug,
         publishedAt: blogsTable.publishedAt,
         createdAt: blogsTable.createdAt,
       })
-      .from(blogsTable);
+      .from(blogsTable)) as Array<{
+      slug: string;
+      publishedAt: Date | string | null;
+      createdAt: Date | string | null;
+    }>;
 
     const firmUrls = firms.map((firm) => ({
       loc: `/firm/${getFirmSlug(firm)}`,

@@ -1,13 +1,20 @@
 {
-  "name": "workspace",
+  "name": "propfirmmarket",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
     "build": "pnpm run typecheck && pnpm -r --if-present run build",
+    "build:production": "pnpm run typecheck:production && pnpm --filter @workspace/propfirmmarket run build && pnpm --filter @workspace/api-server run build",
+    "start:production": "pnpm --filter @workspace/api-server run start",
     "typecheck:libs": "tsc --build",
+    "typecheck:production": "pnpm run typecheck:libs && pnpm --filter @workspace/propfirmmarket run typecheck && pnpm --filter @workspace/api-server run typecheck",
     "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck"
   },
   "private": true,
+  "packageManager": "pnpm@11.6.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "devDependencies": {
     "typescript": "~5.9.2",
     "prettier": "^3.8.1"

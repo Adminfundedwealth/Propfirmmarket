@@ -1,4 +1,6 @@
 import express, { type Express } from "express";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import cors from "cors";
 import helmet from "helmet";
 import pinoHttp from "pino-http";
@@ -8,6 +10,10 @@ import { logger } from "./lib/logger";
 import { startCronJobs } from "./lib/cron.js";
 
 const app: Express = express();
+const publicDirectory = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  "../../propfirmmarket/dist/public",
+);
 
 app.use(helmet({ contentSecurityPolicy: false }));
 
@@ -75,6 +81,19 @@ app.use(express.json({ limit: "1mb" }));
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", router);
+app.use(express.static(publicDirectory));
+app.use((req, res, next) => {
+  if (
+    req.method !== "GET" ||
+    req.path.startsWith("/api") ||
+    !req.accepts("html")
+  ) {
+    next();
+    return;
+  }
+
+  res.sendFile(path.join(publicDirectory, "index.html"));
+});
 
 if (process.env.NODE_ENV !== "test") {
   startCronJobs();

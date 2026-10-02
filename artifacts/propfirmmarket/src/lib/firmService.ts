@@ -1,4 +1,4 @@
-import { firms, type Firm } from '@/data/firms';
+import { firms, type Firm } from '../data/firms';
 
 export interface FirmRepository {
   list(): Promise<Firm[]>;
