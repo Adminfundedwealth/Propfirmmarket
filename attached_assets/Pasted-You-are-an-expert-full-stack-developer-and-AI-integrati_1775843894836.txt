@@ -1,0 +1,163 @@
+You are an expert full-stack developer and AI integration engineer.
+
+Upgrade the existing "Propfirm Market" web application by integrating Google AI Studio (Gemini API) to create an AI-powered prop firm recommendation and analysis system.
+
+---
+
+# 🎯 GOAL
+
+Transform the platform into:
+
+🔥 "AI Prop Firm Advisor"
+
+Users should get personalized recommendations, analysis, and insights.
+
+---
+
+# 🧠 AI FEATURES TO BUILD
+
+---
+
+## 1️⃣ AI FIRM FINDER (MAIN FEATURE)
+
+Create a form where user inputs:
+
+* Budget (e.g. $50–$500)
+* Experience (Beginner / Intermediate / Advanced)
+* Risk tolerance (Low / Medium / High)
+* Trading style (Scalping / Swing / Intraday)
+
+Send this data to Google AI Studio.
+
+Prompt:
+
+"You are a professional trading advisor. Based on the user's profile, recommend the best 3 prop firms. Explain clearly why each firm is suitable."
+
+Return structured output:
+
+* Firm name
+* Reason
+* Risk level
+
+Display results in UI.
+
+---
+
+## 2️⃣ AI COMPARISON ANALYZER
+
+When user compares 2–3 firms:
+
+Send firm data to AI.
+
+Prompt:
+
+"Compare these prop firms and explain which one is better based on cost, payout, rules, and reliability."
+
+Output:
+
+* Best option
+* Pros & cons
+
+---
+
+## 3️⃣ AI REVIEW SUMMARIZER
+
+Collect user reviews and send to AI.
+
+Prompt:
+
+"Summarize the reviews of this prop firm into key strengths, weaknesses, and trust level."
+
+Display:
+
+* Pros
+* Cons
+* Overall sentiment
+
+---
+
+## 4️⃣ AI RISK / SCAM DETECTOR
+
+Input:
+
+* complaints
+* payout delays
+* negative reviews
+
+Prompt:
+
+"Analyze this data and determine if this prop firm is risky or unreliable."
+
+Output:
+
+* Risk score
+* Warning message
+
+---
+
+## 5️⃣ AI CHAT ASSISTANT
+
+Add chatbot widget.
+
+User can ask:
+
+* "Best prop firm under $100"
+* "Which firm is safest?"
+
+Prompt:
+
+"You are an expert prop firm advisor. Answer clearly and simply."
+
+---
+
+# ⚙️ TECH IMPLEMENTATION
+
+* Use Google AI Studio (Gemini API)
+* Create backend endpoint:
+  /api/ai/query
+
+Example API call:
+
+POST request to Gemini API with user prompt.
+
+Return structured JSON.
+
+---
+
+# 🧩 UI REQUIREMENTS
+
+* Add "AI Finder" button on homepage
+* Add chat widget bottom-right
+* Clean modern UI (dark theme)
+
+---
+
+# ⚡ PERFORMANCE
+
+* Cache AI responses when possible
+* Avoid repeated API calls
+
+---
+
+# 🔐 SECURITY
+
+* Validate user input
+* Prevent spam API calls
+
+---
+
+# 🎯 FINAL RESULT
+
+The platform should feel like:
+
+* Smart
+* Personalized
+* Helpful
+
+Not just a static comparison site.
+
+Focus on:
+
+* simplicity
+* clarity
+* usefulness

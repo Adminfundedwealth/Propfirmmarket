@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /seo-dashboard
+Disallow: /terminal
+
+Sitemap: https://propfirmmarket.in/api/sitemap.xml

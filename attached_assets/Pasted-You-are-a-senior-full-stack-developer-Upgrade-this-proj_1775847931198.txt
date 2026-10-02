@@ -1,0 +1,174 @@
+You are a senior full-stack developer.
+
+Upgrade this project to be part of a 3-platform ecosystem:
+
+1. Propfirm Market
+2. PFC Championship
+3. PFT Terminal
+
+---
+
+# 🎯 GOAL
+
+Create a connected user experience where:
+
+* Users can move between all platforms
+* Show cross-platform suggestions
+* Use popup funnels to increase conversion
+
+---
+
+# 🔗 PLATFORM LINKS
+
+const PLATFORMS = {
+market: "https://your-market-url.com",
+championship: "https://your-championship-url.com",
+terminal: "https://your-terminal-url.com"
+};
+
+---
+
+# 🧭 GLOBAL NAVIGATION
+
+Add a top navbar:
+
+* Market
+* Championship
+* Terminal
+
+Each button redirects to respective platform.
+
+---
+
+# 🧠 USER STORAGE
+
+Store user globally:
+
+localStorage.setItem("user", JSON.stringify(user));
+
+On load:
+const user = JSON.parse(localStorage.getItem("user"));
+
+---
+
+# 🔥 POPUP FUNNEL SYSTEM
+
+Create popup system with triggers:
+
+---
+
+## 1. AFTER SIGNUP
+
+Show:
+
+"🎉 Welcome! Start your journey"
+
+Buttons:
+
+* Join Championship
+* Compare Firms
+* Start Trading
+
+---
+
+## 2. AFTER PROFIT
+
+If profit > 3%:
+
+Show:
+
+"🚀 You're ready for a real funded account"
+
+Button:
+
+* View Best Prop Firms
+
+---
+
+## 3. AFTER LOSS
+
+If user loses trades:
+
+Show:
+
+"⚠️ Improve your strategy with beginner-friendly firms"
+
+Button:
+
+* See Recommendations
+
+---
+
+## 4. EXIT INTENT
+
+Detect mouse leaving screen:
+
+Show:
+
+"🔥 Before you go, explore prop firm deals"
+
+---
+
+# 🔄 CROSS PLATFORM FLOW
+
+---
+
+## FROM MARKET
+
+Buttons:
+
+* "Start Trading" → Terminal
+* "Join Championship" → Championship
+
+---
+
+## FROM CHAMPIONSHIP
+
+Buttons:
+
+* "Start Trading" → Terminal
+
+---
+
+## FROM TERMINAL
+
+Show:
+
+* "Recommended Prop Firms"
+
+---
+
+# 💰 MONETIZATION
+
+All prop firm buttons must:
+
+* Open affiliate links
+* Track clicks
+
+---
+
+# 🎨 UI
+
+* Dark theme
+* Neon glow buttons
+* Modern fintech style
+
+---
+
+# 🚀 RESULT
+
+System should feel like:
+
+ONE ecosystem (not 3 separate apps)
+
+Users:
+
+* Enter from any platform
+* Navigate easily
+* Get guided toward prop firm offers
+
+Focus on:
+
+* simplicity
+* conversion
+* user flow

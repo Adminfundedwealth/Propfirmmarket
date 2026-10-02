@@ -1,0 +1,210 @@
+You are a senior full-stack engineer.
+
+Modify this project to connect with two other platforms:
+
+1. Propfirm Market (PFM)
+2. PFC Championship
+3. PFT Terminal
+
+All 3 must work as ONE ecosystem.
+
+---
+
+# 🔗 CORE GOAL
+
+This app must:
+
+* Connect to shared backend APIs
+* Support single sign-on (SSO)
+* Share user data across all platforms
+* Allow navigation between platforms
+
+---
+
+# 🌐 SHARED CONFIG (IMPORTANT)
+
+Create a config file:
+
+const CONFIG = {
+API_BASE_URL: "https://your-backend-api.com",
+MARKET_URL: "https://pfm.yourdomain.com",
+CHAMPIONSHIP_URL: "https://pfc.yourdomain.com",
+TERMINAL_URL: "https://pft.yourdomain.com"
+};
+
+Use this config everywhere.
+
+---
+
+# 🔐 AUTH SYSTEM (SSO)
+
+Implement:
+
+* JWT authentication
+* Store token in localStorage or cookies
+
+On app load:
+
+* Check token
+* Fetch user from /api/user/me
+* Auto-login across all platforms
+
+---
+
+# 👤 SHARED USER SYSTEM
+
+User object:
+
+{
+id,
+name,
+email,
+balance,
+trades,
+leaderboard_rank
+}
+
+Fetch from:
+GET /api/user/me
+
+---
+
+# 🔄 CROSS PLATFORM NAVIGATION
+
+Add top section:
+
+"Powered by PFC Network"
+
+Add 3 buttons:
+
+* Go to Market → redirect to CONFIG.MARKET_URL
+* Go to Championship → redirect to CONFIG.CHAMPIONSHIP_URL
+* Go to Terminal → redirect to CONFIG.TERMINAL_URL
+
+---
+
+# 🔁 DATA SYNC
+
+---
+
+## Terminal → Championship
+
+POST /api/trade/close
+
+Send:
+
+* userId
+* pnl
+* trade data
+
+Update leaderboard automatically
+
+---
+
+## Championship → Terminal
+
+Allow:
+
+* “Start Trading” button
+* Redirect to Terminal with token
+
+---
+
+## Market → Terminal
+
+* “Start Challenge”
+* Create demo account via API:
+  POST /api/account/create
+
+---
+
+## Market → Championship
+
+* “Join Competition”
+* Register user in leaderboard:
+  POST /api/championship/join
+
+---
+
+# 📊 SHARED LEADERBOARD
+
+GET /api/leaderboard
+
+Display:
+
+* rank
+* user
+* pnl
+
+---
+
+# ⚙️ API STRUCTURE
+
+Use these endpoints:
+
+POST /api/auth/login
+GET /api/user/me
+POST /api/account/create
+POST /api/trade/close
+GET /api/leaderboard
+POST /api/championship/join
+
+---
+
+# 🎨 UI CONSISTENCY
+
+Keep same design system:
+
+* Dark theme
+* Neon glow
+* Same fonts
+
+Accent colors:
+
+* Market → green/blue
+* Championship → gold
+* Terminal → purple/blue
+
+---
+
+# 🔄 REDIRECTION WITH TOKEN
+
+When navigating:
+
+window.location.href = `${CONFIG.TERMINAL_URL}?token=${userToken}`;
+
+On load:
+
+* Read token from URL
+* Store it
+* Authenticate user
+
+---
+
+# 🚀 FINAL BEHAVIOR
+
+User flow:
+
+1. Login once
+2. Navigate freely between all platforms
+3. Trade in Terminal
+4. Results update Championship
+5. Discover firms in Market
+
+---
+
+# 🧠 IMPORTANT
+
+* All apps must use same API
+* All apps must use same auth token
+* All apps must share user state
+
+---
+
+# 🎯 RESULT
+
+A fully connected ecosystem like:
+
+TradingView + FTMO + Leaderboard in one system
+
+Make it scalable, clean, and modular.
