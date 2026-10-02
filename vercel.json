@@ -1,0 +1,5 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "pnpm --dir artifacts/propfirmmarket run build",
+  "outputDirectory": "artifacts/propfirmmarket/dist/public"
+}
